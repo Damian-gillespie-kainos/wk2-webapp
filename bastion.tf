@@ -1,3 +1,4 @@
+# To set up a Bastion we need a public IP 
 # PUBLIC IP
 resource "azurerm_public_ip" "kpa23-public-ip-dg" {
   name                = "kpa23-public-ip-dg"

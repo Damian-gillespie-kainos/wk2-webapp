@@ -1,3 +1,4 @@
+# Seeting up the actual keyvault itself
 resource "azurerm_key_vault" "kpa23-keyvault-dg" {
   name                     = "kpa23-keyvault-dg"
   location                 = azurerm_resource_group.kpa23-rg-dg.location
@@ -8,6 +9,7 @@ resource "azurerm_key_vault" "kpa23-keyvault-dg" {
 
 }
 
+# Configuring the access policy for the keyvault 
 resource "azurerm_key_vault_access_policy" "kpa23-kv-access-policy-dg" {
   key_vault_id = azurerm_key_vault.kpa23-keyvault-dg.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
@@ -20,8 +22,8 @@ resource "azurerm_key_vault_access_policy" "kpa23-kv-access-policy-dg" {
     "Purge",
     "Recover",
     "Update",
-    "GetRotationPolicy",
-    "SetRotationPolicy"
+    "GetRotationPolicy",    # Needed
+    "SetRotationPolicy"     # Needed
   ]
 
   secret_permissions = [
@@ -29,6 +31,7 @@ resource "azurerm_key_vault_access_policy" "kpa23-kv-access-policy-dg" {
   ]
 }
 
+# This defines the type of key for the key vault
 resource "azurerm_key_vault_key" "kpa23-keyvault-key2-dg" {
   name         = "kpa23-keyvalult-key2-dg"
   key_vault_id = azurerm_key_vault.kpa23-keyvault-dg.id
