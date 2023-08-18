@@ -3,6 +3,8 @@ resource "tls_private_key" "kpa23-keygen-dg" {
   rsa_bits  = 4096
 }
 
+# First key secret
+
 resource "azurerm_key_vault_secret" "kpa23-kv-public-dg" {
   name         = "ssh-public-dg"
   value        = tls_private_key.kpa23-keygen-dg.public_key_openssh
